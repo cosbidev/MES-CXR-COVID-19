@@ -1,0 +1,4 @@
+img
+C:/Users/guarr/Desktop/Campus Bio-Medico/Soda/COVID/data/tiff_analysis_images_raw/Careggi_1.tif
+C:/Users/guarr/Desktop/Campus Bio-Medico/Soda/COVID/data/tiff_analysis_images_raw/Careggi_10.tif
+C:/Users/guarr/Desktop/Campus Bio-Medico/Soda/COVID/data/tiff_analysis_images_raw/Careggi_100.tif
