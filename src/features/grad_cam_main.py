@@ -77,6 +77,11 @@ def save_sensitivity(filename, maps):
     maps = cv2.resize(maps, (224, 224), interpolation=cv2.INTER_NEAREST)
     cv2.imwrite(filename, maps)
 
+
+def save_raw_image(filename, raw_image):
+    cv2.imwrite(filename, np.uint8(raw_image.astype(np.float)))
+
+
 source = "../data"
 
 image_dir = os.path.join(source, "sub_tiff_analysis_images_raw")
@@ -206,13 +211,8 @@ for model_name in model_list:
         for j in range(len(images)):
             print("\t#{}: {} ({:.5f})".format(j, classes[ids[j, i]], probs[j, i]))
 
-            save_gradient(
-                filename=osp.join(
-                    output_model_dir,
-                    "{}-{}-vanilla-{}.png".format(j, model_name, classes[ids[j, i]]),
-                ),
-                gradient=gradients[j],
-            )
+            save_gradient(filename=osp.join(output_model_dir, "{}-{}-vanilla-{}.png".format(j, model_name, classes[ids[j, i]]),),
+                          gradient=gradients[j],)
 
     # Remove all the hook function in the "model"
     bp.remove_hook()
@@ -230,13 +230,8 @@ for model_name in model_list:
         for j in range(len(images)):
             print("\t#{}: {} ({:.5f})".format(j, classes[ids[j, i]], probs[j, i]))
 
-            save_gradient(
-                filename=osp.join(
-                    output_model_dir,
-                    "{}-{}-deconvnet-{}.png".format(j, model_name, classes[ids[j, i]]),
-                ),
-                gradient=gradients[j],
-            )
+            save_gradient(filename=osp.join(output_model_dir, "{}-{}-deconvnet-{}.png".format(j, model_name, classes[ids[j, i]]),),
+                          gradient=gradients[j],)
 
     deconv.remove_hook()
 
@@ -263,32 +258,19 @@ for model_name in model_list:
 
             # Guided Backpropagation
             save_gradient(
-                filename=osp.join(
-                    output_model_dir,
-                    "{}-{}-guided-{}.png".format(j, model_name, classes[ids[j, i]]),
-                ),
-                gradient=gradients[j],
-            )
+                filename=osp.join(output_model_dir, "{}-{}-guided-{}.png".format(j, model_name, classes[ids[j, i]]),),
+                gradient=gradients[j],)
 
             # Grad-CAM
-            save_gradcam(
-                filename=osp.join(
-                    output_model_dir,
-                    "{}-{}-gradcam-{}-{}.tiff".format(
-                        j, model_name, target_layer, classes[ids[j, i]]
-                    ),
-                ),
-                gcam=regions[j, 0],
-                raw_image=raw_images[j],
-            )
+            save_gradcam(filename=osp.join(output_model_dir, "{}-{}-gradcam-{}-{}.tiff".format(j, model_name, target_layer, classes[ids[j, i]]),),
+                         gcam=regions[j, 0],
+                         raw_image=raw_images[j],
+                         paper_cmap=False)
 
             # Guided Grad-CAM
-            save_gradient(
-                filename=osp.join(
-                    output_model_dir,
-                    "{}-{}-guided_gradcam-{}-{}.png".format(
-                        j, model_name, target_layer, classes[ids[j, i]]
-                    ),
-                ),
-                gradient=torch.mul(regions, gradients)[j],
-            )
+            save_gradient(filename=osp.join(output_model_dir, "{}-{}-guided_gradcam-{}-{}.png".format(j, model_name, target_layer, classes[ids[j, i]]),),
+                          gradient=torch.mul(regions, gradients)[j],)
+
+            # Save Raw iamge
+            save_raw_image(filename=osp.join(output_model_dir, "{}-{}-original-{}-{}.png".format(j, model_name, target_layer, classes[ids[j, i]]), ),
+                          raw_image=raw_images[j])

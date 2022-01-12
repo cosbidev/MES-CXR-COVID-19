@@ -1,4 +1,0 @@
-img	COVID	Normal	Prediction	Risk	Gradcam
-C:/Users/guarr/Desktop/Campus Bio-Medico/Soda/COVID/data/tiff_analysis_images_raw/Careggi_1.tif	0.9894012808799744	0.010598703287541866	COVID	+	./data/interim/predict/gradcam/0-COVID.png
-C:/Users/guarr/Desktop/Campus Bio-Medico/Soda/COVID/data/tiff_analysis_images_raw/Careggi_10.tif	0.9999724626541138	2.7482879886520095e-05	COVID	+	./data/interim/predict/gradcam/1-COVID.png
-C:/Users/guarr/Desktop/Campus Bio-Medico/Soda/COVID/data/tiff_analysis_images_raw/Careggi_100.tif	0.9999797344207764	2.030439100053627e-05	COVID	+	./data/interim/predict/gradcam/2-COVID.png
