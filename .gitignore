@@ -1,6 +1,5 @@
 /.idea
 /docs
-/models/esa
-/models/esa_healthy
+/models
 /references
 /venv
